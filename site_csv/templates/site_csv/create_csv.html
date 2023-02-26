@@ -1,0 +1,55 @@
+{% extends "site_csv/base.html" %}
+
+
+{% block content %}
+<div class="container">
+    <h1>
+        Sample schemas
+        <a href="{% url 'create_schema' %}">Edit scheme</a>
+    </h1>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Column name</th>
+            <th>Column type</th>
+        </tr>
+
+        {% for column in schema.columns.all %}
+        <tr>
+            <td>{{ column.pk }}</td>
+            <td>{{ column.name }}</td>
+            <td>{{ column.type }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <h1>
+        Data sets
+    </h1>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ csv_data_forms }}
+        <input type="submit" value="Generate data" class="btn btn-primary">
+    </form>
+
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Created</th>
+            <th>Status</th>
+            <th>Actions</th>
+        </tr>
+
+
+        {% for data in csv_data %}
+        <tr>
+            <td>{{ data.pk }}</td>
+            <td>{{ data.modified }}</td>
+            <td> Ready</td>
+            {% if data.csv_file %}
+            <td><a id='download' href="{{ data.csv_file.url }}" class="text-primary">Download</a></td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

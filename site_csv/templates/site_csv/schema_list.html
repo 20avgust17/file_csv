@@ -1,0 +1,28 @@
+{% extends "site_csv/base.html" %}
+
+{% block content %}
+<div class="container">
+    <h1>
+        Data schemas
+        <a href="{% url 'create_schema' %}" class="btn btn-primary link-to-page">New schema</a>
+    </h1>
+    <table class="table">
+        <tr>
+            <th>#</th>
+            <th>Title</th>
+            <th>Modified</th>
+            <th>Actions</th>
+        </tr>
+
+        {% for schema in schema_list %}
+        <tr>
+            <td>{{ schema.pk }}</td>
+            <td><a href="{% url 'create_csv' pk=schema.pk %}">{{ schema.title }}</a></td>
+            <td>{{ schema.modified }}</td>
+            <td><a href="{% url 'schema_update' pk=schema.pk %}">Edit scheme</a> <a href="{% url 'schema_delete' pk=schema.pk %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
+{% endblock %}

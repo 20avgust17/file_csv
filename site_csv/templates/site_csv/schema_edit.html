@@ -1,0 +1,11 @@
+{% extends "site_csv/base.html" %}
+
+{% block content %}
+  <h1>Edit Schema</h1>
+
+  <form action="" method="post" novalidate>
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Submit" class="btn btn-primary">
+  </form>
+{% endblock %}

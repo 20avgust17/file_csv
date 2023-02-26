@@ -1,0 +1,50 @@
+{% extends "site_csv/base.html" %}
+
+
+{% block content %}
+<div style="padding: 0px 1400px 27px 100px">
+    <h1>New Schema</h1>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ schemas_form }}
+        <div style="padding-top: 20px">
+            <input type="submit" value="Submit" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+<div style="padding-left: 100px">
+    <h1>Schema columns</h1>
+    <table class="table">
+        <tr>
+            <th>Column name</th>
+            <th>Type</th>
+            <th>Order</th>
+            <th>start_num</th>
+            <th>end_num</th>
+        </tr>
+
+
+        {% for val in column %}
+        <tr>
+            <td>{{ val.name }}</td>
+            <td>{{ val.type }}</td>
+            <td>{{ val.order }}</td>
+            {% if val.type == 'Number' %}
+            <td>{{ val.start_num }}</td>
+            <td>{{ val.end_num }}</td>
+            {% else %}
+            <td>-</td>
+            <td>-</td>
+            {% endif %}
+            <td><a href="{% url 'columns_delete' pk=val.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    <form action="" method="post" novalidate>
+        {% csrf_token %}
+        {{ column_form }}
+        <input type="submit" value="Add column" class="btn btn-primary">
+    </form>
+</div>
+
+{% endblock %}

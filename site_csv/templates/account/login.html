@@ -1,0 +1,23 @@
+{% extends "site_csv/base.html" %}
+
+{% block content %}
+<h2>Login: Admin@gmail.com</h2>
+<h2>Password: AdminPlaneks2023</h2>
+{% if not user.is_authenticated %}
+<div style="padding: 260px 0px 3000px 600px">
+<h1 style="padding-left: 250px">Login</h1>
+    <form method="post" action="{% url 'login' %}">
+        {% csrf_token %}
+        {{ form }}
+        <input type="submit" value="Login" class="btn btn-primary"/>
+    </form>
+</div>
+{% else %}
+<h1>Вы уже зарегистрированы! Тестовы данные можете найти выше!</h1>
+{% endif %}
+
+{% endblock %}
+
+
+
+

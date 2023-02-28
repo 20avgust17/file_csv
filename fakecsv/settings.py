@@ -80,12 +80,8 @@ WSGI_APPLICATION = 'fakecsv.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'db_planeks',
-        'USER': 'postgres',
-        'PASSWORD': '123456asd',
-        'HOST': 'localhost',
-        'PORT': '1212',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
